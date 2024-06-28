@@ -1,5 +1,7 @@
 package com.example.entrylog;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,28 +14,33 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
-    EditText a1 ,a2 ;
-AppCompatButton b1;
+import com.example.entrylog.Logpage;
 
+public class MainActivity extends AppCompatActivity {
+    AppCompatButton b1;
+    EditText e1,e2;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-        a1=(EditText)findViewById(R.id.uname);
-        a2=(EditText)findViewById(R.id.pass);
-        b1=(AppCompatButton)findViewById(R.id.logbtn);
+        b1=(AppCompatButton) findViewById(R.id.logbtn);
+        e1=(EditText)findViewById(R.id.uname);
+        e2=(EditText)findViewById(R.id.pass);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String  getUsername = a1.getText().toString();;
-                String password = a2.getText().toString();
-                Toast.makeText(getApplicationContext(),"getUsername",Toast.LENGTH_SHORT).show();
+                String getUsername=e1.getText().toString();
+                String getPassword=e2.getText().toString();
+                if (getUsername.equals("user") && getPassword.equals("123"))
+                {
+                    Intent ii=new Intent(getApplicationContext(), Logpage.class);
+                    startActivity(ii);
+                }
+                else
+                    Toast.makeText(getApplicationContext(),"Wrong Username or Password",Toast.LENGTH_SHORT).show();
             }
-        });
-
-
-    }
+  });
+}
 }
